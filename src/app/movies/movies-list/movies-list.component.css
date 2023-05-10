@@ -1,0 +1,21 @@
+.card {
+    max-width: 300px;
+    margin-bottom: 1rem;
+    margin-right: 2rem;
+    display: inline-block;
+}
+
+button {
+    margin-left: 1em;
+    width: 50%;
+}
+
+img {
+    max-width: 300px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    width: 50%;
+}

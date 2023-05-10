@@ -1,0 +1,44 @@
+<app-generic-list *ngIf="movies" [list]="movies">
+  <!-- <ng-container loading> Loading...</ng-container>
+  <ng-container empty>Missing movies</ng-container> -->
+  <ng-container content>
+    <mat-card *ngFor="let movie of movies; let i = index" class="card">
+      <mat-card-header>
+        <mat-card-title>
+          <a [routerLink]="'/movies/' + movie.id">{{ movie.title }}</a>
+        </mat-card-title>
+      </mat-card-header>
+      <a [routerLink]="'/movies/' + movie.id">
+        <img mat-card-image src="{{ movie.poster }}" alt="Poster" />
+      </a>
+      <app-authorize-view [role]="'admin'">
+        <ng-container authorized>
+          <mat-card-actions>
+            <a
+              [routerLink]="'/movies/edit/' + movie.id"
+              mat-flat-button
+              color="primary"
+            >
+              Edit
+            </a>
+            <button
+              [swal]="{
+                title: 'Confirmation',
+                text: 'Are you sure you want to delete this movie?',
+                showCancelButton: true
+              }"
+              (confirm)="removeMovie(movie.id)"
+              mat-flat-button
+              color="warn"
+              type="button"
+            >
+              Delete
+            </button>
+          </mat-card-actions>
+        </ng-container>
+      </app-authorize-view>
+    </mat-card>
+  </ng-container>
+</app-generic-list>
+
+<mat-spinner *ngIf="!movies"></mat-spinner>

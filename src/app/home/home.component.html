@@ -1,0 +1,14 @@
+<!-- <input type="file" style="display: none" #templateVar />
+<button (click)="templateVar.click()">Click da button</button> -->
+
+<h1>Movies in theaters:</h1>
+<app-movies-lsit
+  (onDelete)="onDelete()"
+  [movies]="moviesTheater"
+></app-movies-lsit>
+
+<h1>Movies to come:</h1>
+<app-movies-lsit
+  (onDelete)="onDelete()"
+  [movies]="moviesFuture"
+></app-movies-lsit>

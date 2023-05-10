@@ -1,0 +1,14 @@
+<h2>Edit Movie</h2>
+
+<app-form-movie
+  *ngIf="model"
+  [model]="model"
+  [selectedGenres]="selectedGenres"
+  [nonSelectedGenres]="nonSelectedGenres"
+  [selectedMovieTheaters]="selectedMovieTheaters"
+  [nonSelectedMovieTheaters]="nonSelectedMovieTheaters"
+  [selectedActors]="selectedActors"
+  (onSaveChanges)="saveChanges($event)"
+></app-form-movie>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

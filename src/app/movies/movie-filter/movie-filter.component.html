@@ -1,0 +1,40 @@
+<h2>Search Movies</h2>
+
+<form [formGroup]="form!">
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input formControlName="title" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Genre</mat-label>
+    <mat-select formControlName="genreId">
+      <mat-option *ngFor="let gener of genres" [value]="gener.id">{{
+        gener.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <mat-checkbox formControlName="upcomingReleases"
+      >Upcoming Releases</mat-checkbox
+    >
+  </div>
+
+  <div>
+    <mat-checkbox formControlName="inTheaters">In Theaters</mat-checkbox>
+  </div>
+
+  <div>
+    <button mat-flat-button (click)="clearForm()" color="warn">Clear</button>
+  </div>
+</form>
+
+<app-movies-lsit (onDelete)="onDelete()" [movies]="movies"></app-movies-lsit>
+
+<mat-paginator
+  [length]="totalAmountOfRecords"
+  [pageSize]="recordsPerPage"
+  [pageSizeOptions]="[5, 10, 20, 50]"
+  (page)="paginatorUpdate($event)"
+></mat-paginator>

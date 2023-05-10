@@ -1,0 +1,54 @@
+<h2>Users</h2>
+
+<app-generic-list *ngIf="users" [list]="users">
+  <ng-container content>
+    <table mat-table [dataSource]="users" class="mat-elevation-z8 table-index">
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-flat-button
+            color="primary"
+            [swal]="{
+              title: 'Confirmation',
+              text: 'Are you sure you want to make this user an admin?',
+              showCancelButton: true
+            }"
+            (confirm)="makeAdmin(element.id)"
+          >
+            Add
+          </button>
+          <button
+            mat-flat-button
+            color="warn"
+            [swal]="{
+              title: 'Confirmation',
+              text: 'Are you sure you want to remove the user as an admin?',
+              showCancelButton: true
+            }"
+            (confirm)="removeAdmin(element.id)"
+          >
+            Remove
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20, 50]"
+      showFirstLastButtons
+      [length]="totalAmountOfRecords"
+      [pageSize]="recordsPerPage"
+      (page)="updatePagination($event)"
+      class="mat-elevation-z8"
+    ></mat-paginator>
+  </ng-container>
+</app-generic-list>
+
+<mat-spinner *ngIf="users == undefined"></mat-spinner>
